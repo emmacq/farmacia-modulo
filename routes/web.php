@@ -1,20 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\farmamodcontroller;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/main', [farmamodcontroller::class, 'main'])->name('main');
 
+Route::get('/alta', [farmamodcontroller::class, 'alta'])->name('alta');
 
-// Página principal
-Route::get('/', [PaginaController::class, 'main'])->name('main');
+Route::post('/guardar', [farmamodcontroller::class, 'guardar'])->name('guardar');
 
-// Página Acerca
-Route::get('/acerca', [PaginaController::class, 'acerca'])->name('acerca');
+Route::get('/reporte', [farmamodcontroller::class, 'reporte'])->name('reporte');
 
-// Página Contacto
-Route::get('/contacto', [PaginaController::class, 'contacto'])->name('contacto');
+Route::get(
+    '/medicamentos-por-categoria/{id_catm}',
+    [farmamodcontroller::class, 'medicamentosPorCategoria']
+)->name('medicamentos.porCategoria');
 
-// Ruta con parámetro
-Route::get('/usuario/{id}', [PaginaController::class, 'usuario'])->name('usuario');
+Route::get(
+    '/servicios-por-categoria/{id_cats}',
+    [farmamodcontroller::class, 'serviciosPorCategoria']
+)->name('servicios.porCategoria');
+
+Route::get('/api/servicios', [ServicioController::class, 'index']);
